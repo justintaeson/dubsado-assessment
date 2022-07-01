@@ -1,7 +1,15 @@
-class TreeNode {
-    constructor(value = null) {
-        this.value = value
-        this.descendants = []
+import Types from './types'
+import * as employeesJSON from './employees.json';
+import Employee from './types';
+import getBoss from './getEmployees'
+
+export default class TreeNode {
+    data: Employee;
+    subordinates: TreeNode[];
+
+    constructor(data: Employee) {
+        this.data = data
+        this.subordinates = [];
     }
 }
 
@@ -11,8 +19,24 @@ class TreeNode {
  * @param {Object[]} employees array of employees
  * @returns {TreeNode}
  */
-function generateCompanyStructure() {}
 
+export function generateCompanyStructure(employees: Array<Employee>) {
+    console.log("Normalizing JSON file...");
+    const normalizedEmployees = employeesJSON.employees.map((employee: Employee) => {
+        let newName: string = employee.name.split("@")[0];
+        newName = newName[0].toUpperCase() + newName.slice(1);
+        employee.name = newName;
+        return employee;
+    });
+
+
+    const root = new TreeNode(normalizedEmployees[0]) // set the root of the tree to the CEO
+    employees.splice(1).forEach((employee: Employee) => {
+        hireEmployee(root, employee, employee.boss);
+    });
+
+    return root;
+}
 /**
  * Adds a new employee to the team and places them under a specified boss.
  *
@@ -21,7 +45,27 @@ function generateCompanyStructure() {}
  * @param {string} bossName
  * @returns {void}
  */
-function hireEmployee() {}
+export function hireEmployee(tree: TreeNode, newEmployee: Employee, bossName: string) {
+    const boss = getFutureBoss(tree, bossName);
+    const employee = new TreeNode(newEmployee);
+    boss.subordinates.push(employee);
+    console.log(`[hireEmployee]: Added new employee (${employee.data.name}) with ${boss.data.name} as their boss`);
+}
+
+function getFutureBoss(treeNode: TreeNode, bossName: string) {
+    if (treeNode.data.name === bossName) return treeNode;
+
+    if (treeNode.subordinates.length) {
+        let boss: TreeNode = null;
+        for (let i = 0; i < treeNode.subordinates.length && !boss; i++) {
+            boss = getFutureBoss(treeNode.subordinates[i], bossName);
+        }
+        return boss;
+    }
+
+    return null;
+}
+
 
 /**
  * Removes an employee from the team by name.
