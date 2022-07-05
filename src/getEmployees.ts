@@ -1,23 +1,4 @@
-import { TreeNode } from "./manageEmployees";
 
-/**
- * Given an employee, will find the corresponding node.
- *
- * @param {TreeNode} treeNode
- * @param {string} bossName
- * @returns {TreeNode} boss
- */
-export function getEmployee(treeNode: TreeNode, name: string) {
-  if (treeNode.value.name === name) return treeNode;
-  if (treeNode.descendants.length) {
-    let employee: TreeNode = null;
-    for (let i = 0; i < treeNode.descendants.length && !employee; i++) {
-      employee = getEmployee(treeNode.descendants[i], name);
-    }
-    return employee;
-  }
-  return null;
-}
 
 /**
  * Given an employee, will find the node above (if any).
@@ -27,18 +8,8 @@ export function getEmployee(treeNode: TreeNode, name: string) {
  * @returns {TreeNode}
  */
 export function getBoss(tree: TreeNode, employeeName: string) {
-  if (tree.descendants.map((descendant) => descendant.value.name).find(name => name === employeeName))
-  return tree;
-  if (tree.descendants.length) {
-    let boss: TreeNode = null;
-    for (let i = 0; i < tree.descendants.length && boss === null; i++) {
-      boss = getBoss(tree.descendants[i], employeeName);
-    }
-    return boss;
-  }
-  return null;
-}
 
+}
 /**
  * Given an employee, will find the nodes directly below (if any).
  * Notice how it returns possibly several subordinates.
@@ -48,15 +19,7 @@ export function getBoss(tree: TreeNode, employeeName: string) {
  * @returns {TreeNode[]}
  */
 export function getSubordinates(tree: TreeNode, employeeName: string) {
-  if (tree.value.name === employeeName) return tree.descendants;
-  if (tree.descendants.length) {
-    let subordinates: TreeNode[] = null;
-    for (let i = 0; i < tree.descendants.length && subordinates === null; i++) {
-      subordinates = getSubordinates(tree.descendants[i], employeeName);
-    }
-    return subordinates;
-  }
-  return null;
+
 }
 
 /**
@@ -66,5 +29,4 @@ export function getSubordinates(tree: TreeNode, employeeName: string) {
  * @param {TreeNode} tree
  * @returns {TreeNode: number}
  */
-export function findLowestEmployee(tree: TreeNode) {
-}
+
