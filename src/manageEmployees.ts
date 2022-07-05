@@ -1,4 +1,4 @@
-import { employees as db } from "./employees.json";
+import { employees as data } from "./employees.json";
 import { getEmployee, getBoss } from "./getEmployees";
 
 interface Employee {
@@ -26,7 +26,7 @@ export class TreeNode {
  */
 export function generateCompanyStructure(employees: Employee[]) {
     console.log("Normalizing JSON file...");
-    const normalEmployees = db.map((employee: Employee) => {
+    const normalEmployees = data.map((employee: Employee) => {
         if (employee.name.includes('@')) {
             let newName: string = ''
             for (let i = 0; i < employee.name.indexOf('@'); i++) {
@@ -69,16 +69,6 @@ export function hireEmployee(tree: TreeNode, newEmployee: Employee, bossName: st
  * Removes an employee from the team by name.
  * If the employee has other employees below them, randomly selects one to take their place.
  *
- * PSEUDOCODE
- * get firedEmployee from tree
- * if firedEmployee descendants array is populated:
- *  select a random subordinate as replacement
- *  remove replacement from firedEmployee's subordinates
- *  all firedEmployee subordinates must point to replacement as parent node
- *  replacement must add firedEmployee subordinates to descendants
- *  replacement adds firedEmployee's boss to parent node
- *  parent/boss node adds replacement into descendants
- * parent/boss node should find index of firedEmployee in descendants and remove it
  *
  * @param {TreeNode} tree
  * @param {string} name employee's name
@@ -142,7 +132,6 @@ export function promoteEmployee(tree: TreeNode, employeeName: string) {
  * Demotes an employee one level below their current ranking.
  * Picks a subordinate and swaps places in the hierarchy.
  *
- * SIMILAR TO PROMOTEEMPLOYEE FUNCTION!!!
  *
  * @param {TreeNode} tree
  * @param {string} employeeName the employee getting demoted

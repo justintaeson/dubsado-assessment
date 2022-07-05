@@ -28,14 +28,3 @@ function main() {
 }
 
 main()
-
-/** EXPECTED OUTPUT
- * Normalizing JSON file...
-Generating employee tree...
-[hireEmployee]: Added new employee (Jeb) with Sarah as their boss
-[fireEmployee]: Fired Alicia and replaced with Sal
-[promoteEmployee]: Promoted Jared and made Bill his subordinate
-[demoteEmployee]: Demoted employee (demoted Xavier and replaced with Maria)
-[getBoss]: Bill's boss is Jared
-[getSubordinate]: Maria's subordinates are Xavier, Morty, Jared
- */
