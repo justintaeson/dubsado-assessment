@@ -37,4 +37,4 @@ In this assessment, my goal was to build an employee management system using Nod
 
 ## There are two functions that have very similar logic and could be merged into one. Which functions do you think can be merged and why?
 
-- The `promoteEmployee` and `demoteEmployee` functions have very similar logic and could be merged into one. This is because both functions use the same concept of finding a node and moving it either up or down the tree
+- The `promoteEmployee` and `demoteEmployee` functions have very similar logic and could be merged into one. This is because both functions use the same concept of finding a node and moving it either up or down the tree.
