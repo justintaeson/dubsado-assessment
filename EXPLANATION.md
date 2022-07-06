@@ -39,6 +39,7 @@ In this assessment, my goal was to build an employee management system using Nod
 
 - The `promoteEmployee` and `demoteEmployee` functions have very similar logic and could be merged into one. This is because both functions use the same concept of finding a node and moving it either up or down the tree.
 
+## Screenshot
 
 ![Screen Shot 2022-07-06 at 11 42 45 AM](https://user-images.githubusercontent.com/97268025/177620662-c36281af-7df8-4e9a-99df-cf29c81dc380.png)
 
